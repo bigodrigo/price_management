@@ -136,14 +136,9 @@ sap.ui.define([
             });
         },
 
-        onProductListButton: function () {
+        onProductAndPriceListButton: function () {
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteProductList");
-        },
-
-        onPriceListButton: function () {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RoutePriceList");
+            oRouter.navTo("RouteProductAndPriceList");
         },
 
         onRequestListButton: function () {

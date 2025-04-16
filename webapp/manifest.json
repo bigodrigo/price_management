@@ -94,6 +94,11 @@
           "target": [
             "TargetWorklist"
           ]
+        },
+        {
+          "name": "RouteCreateProductAndPrice",
+          "pattern": "CreateProductAndPrice",
+          "target": ["TargetCreateProductAndPrice"]
         }
       ],
       "targets": {
@@ -103,6 +108,12 @@
           "clearControlAggregation": false,
           "viewId": "Worklist",
           "viewName": "Worklist"
+        },
+        "TargetCreateProductAndPrice": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "CreateProductAndPrice",
+          "viewName": "CreateProductAndPrice"
         }
       }
     },

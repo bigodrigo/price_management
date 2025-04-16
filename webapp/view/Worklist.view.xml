@@ -94,8 +94,7 @@
 
         <footer>
             <Toolbar class="padded-footer">
-                <Button text="Product List" press=".onProductListButton"/>
-                <Button text="Price List" press=".onPriceListButton" />
+                <Button text="Product and Price List" press=".onProductAndPriceListButton"/>
                 <Button text="Request List" press=".onRequestListButton"/>
                 <ToolbarSpacer/>
                 <Button text="Reject" press="onReject" type="Reject" icon="sap-icon://decline" />
