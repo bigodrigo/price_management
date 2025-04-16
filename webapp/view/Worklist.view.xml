@@ -1,0 +1,106 @@
+<mvc:View 
+    controllerName="pricemanagement.controller.Worklist"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    height="100%">
+
+    <Page
+        id="worklistPage"
+        showFooter="true"
+        title="{i18n>worklistTitle}"
+        titleAlignment="Center"
+    >
+        <content>
+            <Table
+                id="table"
+                mode="MultiSelect"
+                width="auto"
+                items="{ 
+                    path: '/RequestSet',
+                    sorter: {
+                        path: 'Product',
+                        descending: false
+                    },
+                    parameters: {
+                        expand: 'toProduct,toPrice'
+                    }
+                }"
+                updateFinished=".onUpdateFinished"
+            >
+                <columns>
+                    <Column width="5rem" id="idColumn">
+                        <Text text="ID"/>
+                    </Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="Product"/>
+                    </Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="Current Price"/>
+                    </Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="New Price"/>
+                    </Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="Date"/>
+                    </Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="Time"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{Id}" />
+
+                            <ObjectIdentifier  
+                                title="{Product}"
+                                text="{toProduct/Name} ({toProduct/ExternalCode})"    
+                            />
+
+                            <Text  text="{toPrice/Value}" />
+
+                            <Text  text="{NewPrice}" />
+
+                            <Text  text="{
+                                path: 'RequestDate',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    style: 'medium'
+                                }
+                            }"/>
+
+                            <Text text="{
+                                path: 'RequestTime',
+                                type: 'sap.ui.model.type.Time',
+                                formatOptions: {
+                                    pattern: 'HH:mm:ss'
+                                }
+                            }"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+
+        <footer>
+            <Toolbar class="padded-footer">
+                <Button text="Product List" press=".onProductListButton"/>
+                <Button text="Price List" press=".onPriceListButton" />
+                <Button text="Request List" press=".onRequestListButton"/>
+                <ToolbarSpacer/>
+                <Button text="Reject" press="onReject" type="Reject" icon="sap-icon://decline" />
+                <Button text="Approve" press="onApprove" type="Accept" icon="sap-icon://accept" />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
