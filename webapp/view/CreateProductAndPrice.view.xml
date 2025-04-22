@@ -21,7 +21,7 @@
                     id="productExternalCodeInput" 
                     value="{form>/newProduct/ExternalCode}" 
                     type="Text"
-                    change=".validateField"
+                    change=".onExternalCodeChange"
                 />
                 <Label text="Product" required="true"/>
                 <Input 

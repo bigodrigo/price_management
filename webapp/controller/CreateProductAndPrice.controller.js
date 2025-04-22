@@ -128,6 +128,66 @@ sap.ui.define([
         onRequestListButton: function () {
             const oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("RouteRequestList");
-        }
+        },
+
+        onExternalCodeChange: async function(oEvent) {
+            const sExternalCode = oEvent.getParameter("value");
+            const oFormModel = this.getView().getModel("form");
+        
+            if (!sExternalCode) {
+                return; // não faz nada se o campo estiver vazio
+            }
+        
+            this.getView().setBusy(true); // mostra loading
+        
+            try {
+                const oResponse = await this.ajaxRequest(sExternalCode);
+                const oProductData = oResponse[0].d;
+        
+                // Atualiza o form com os dados retornados
+                oFormModel.setProperty("/newProduct/Name", oProductData.ProductName || "");
+                // oFormModel.setProperty("/newProduct/CategoryId", oProductData.CategoryId ? `Categoria ${oProductData.CategoryId}` : "");
+                // oFormModel.setProperty("/newProduct/SupplierID", oProductData.SupplierID ? `Fornecedor ${oProductData.SupplierID}` : "");
+                oFormModel.setProperty("/newProduct/CategoryId", oProductData.CategoryId || "");
+                oFormModel.setProperty("/newProduct/SupplierID", oProductData.SupplierID || "");
+                oFormModel.setProperty("/newProduct/Weight", oProductData.Weight || "");
+                oFormModel.setProperty("/newProduct/Discontinued", oProductData.Discontinued || "");
+        
+                // MessageToast.show("Dados do produto carregados com sucesso!");
+                console.error("API fetch", oProductData);
+            } catch (oError) {
+                MessageToast.show("Produto não encontrado.");
+                console.error("Erro ao buscar produto:", oError);
+            } finally {
+                this.getView().setBusy(false);
+            }
+        },
+
+        ajaxRequest: function(sExternalCode) {
+            return new Promise((resolve, reject) => {
+                // Temporary CORS proxy - replace with your actual backend endpoint
+                const sUrl = `https://cors-anywhere.herokuapp.com/https://services.odata.org/V2/Northwind/Northwind.svc/Products(${sExternalCode})`;
+                
+                $.ajax({
+                    url: sUrl,
+                    method: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    success: (oData, sTextStatus, oJqXHR) => {
+                        if (!oData || !oData.d) {
+                            reject(new Error("Invalid response format"));
+                            return;
+                        }
+                        resolve([oData, sTextStatus, oJqXHR]);
+                    },
+                    error: (oJqXHR, sTextStatus, sErrorThrown) => {
+                        reject(new Error(`AJAX error: ${sTextStatus} - ${sErrorThrown}`));
+                    }
+                });
+            });
+        }, 
     });
 });
