@@ -16,17 +16,17 @@
         
         <content>
             <f:SimpleForm id="productCreationForm" editable="true" layout="ResponsiveGridLayout">
-                <Label text="External Id" required="true"/>
+                <Label text="External Code" required="true"/>
                 <Input 
-                    id="productExternalIdInput" 
-                    value="{form>/newProduct/ExternalId}" 
+                    id="productExternalCodeInput" 
+                    value="{form>/newProduct/ExternalCode}" 
                     type="Text"
                     change=".validateField"
                 />
                 <Label text="Product" required="true"/>
                 <Input 
                     id="productNameInput" 
-                    value="{form>/newProduct/Descricao}" 
+                    value="{form>/newProduct/Name}" 
                     type="Text"
                     change=".validateField"
                 />                

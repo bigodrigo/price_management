@@ -7,9 +7,11 @@ sap.ui.define([
 
     return Controller.extend("pricemanagement.controller.CreateProductAndPrice", {
         onInit: function() {
+            var oNow = new Date();
+
             var oFormModel = new JSONModel({
                 newProduct: {
-                    ExternalId: "",
+                    ExternalCode: "",
                     Name: "",
                     Barcode: "",
                     CategoryId: "",
@@ -23,8 +25,8 @@ sap.ui.define([
                     ProductId: "",
                     Value: "",
                     Currency: "",
-                    ValidFrom: "",
-                    ValidTo: ""
+                    ValidFrom: oNow,
+                    ValidTo: null
                 }
             });
             this.getView().setModel(oFormModel, "form");
@@ -38,7 +40,7 @@ sap.ui.define([
         onCancel: function() {
             var oModel = this.getView().getModel("form");
             oModel.setProperty("/newProduct", {
-                ExternalId: "",
+                ExternalCode: "",
                 Name: "",
                 Barcode: "",
                 CategoryId: "",
@@ -52,8 +54,8 @@ sap.ui.define([
                 ProductId: "",
                 Value: "",
                 Currency: "",
-                ValidFrom: "",
-                ValidTo: ""
+                ValidFrom: null, // oNow?
+                ValidTo: null
             });
         },
 
@@ -61,6 +63,8 @@ sap.ui.define([
             var oForm = this.getView().getModel("form");
             var oProductData = oForm.getProperty("/newProduct");
             var oPriceData = oForm.getProperty("/newPrice");
+            console.log('Product: ', oProductData)
+            console.log('Price: ', oPriceData)
 
             oProductData.Uom = oProductData.Uom.toUpperCase();
             oPriceData.Currency = oPriceData.Currency.toUpperCase();
@@ -69,7 +73,8 @@ sap.ui.define([
             try {
                 const oCreatedProduct = await this._createProduct(oProductData);
                 // await this._createProduct(oProductData);
-                await this._createPrice(oPriceData);
+                // await this._createPrice(oPriceData);
+                oPriceData.ProductId = oCreatedProduct.Id
                 const oCreatedPrice = await this._createPrice(oPriceData);
                 console.log(oCreatedProduct)
                 console.log(oCreatedPrice)

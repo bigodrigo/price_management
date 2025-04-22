@@ -25,7 +25,7 @@ sap.ui.define([
                     : oI18n.getText("worklistTableTitle");
 
                 this.getView().getModel().setProperty("/worklistTableTitle", sTitle);
-                this.fetchNewPrices();
+                // this.fetchNewPrices();
             } catch (oError) {
                 console.error("Error in onUpdateFinished:", oError);
             }
@@ -138,7 +138,8 @@ sap.ui.define([
 
         onProductAndPriceListButton: function () {
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteProductAndPriceList");
+            // oRouter.navTo("RouteProductAndPriceList");
+            oRouter.navTo("RouteCreateProductAndPrice");
         },
 
         onRequestListButton: function () {

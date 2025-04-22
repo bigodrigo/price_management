@@ -1,1 +1,10 @@
 /* Enter your custom styles here */
+.padded-footer {
+    padding: 0 3rem; /* Left and right padding */
+    margin: 0 auto;
+    display: flex;
+ }
+
+.customDeleteIcon .sapUiIcon {
+    color: #cc1010 !important;
+}
