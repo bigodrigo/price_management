@@ -1,0 +1,118 @@
+<mvc:View
+    controllerName="pricemanagement.controller.UpdateProductAndPrice"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    height="100%">
+    
+    <Page
+        id="UpdateProductAndPricePage"
+        title="Update Product and Price"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
+        
+        <content>
+            <f:SimpleForm id="productUpdateForm" editable="true" layout="ResponsiveGridLayout">
+                <Label text="External Code" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/ExternalCode}" 
+                    type="Text"
+                    change=".onExternalCodeChange"
+                />
+                <Label text="Product" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/Name}" 
+                    type="Text"
+                    change=".validateField"
+                />                
+                <Label text="Barcode" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/Barcode}" 
+                    type="Text"
+                    change=".validateField"
+                />  
+                <Label text="Category Id" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/CategoryId}" 
+                    type="Text"
+                    change=".validateField"
+                />  
+                <Label text="Supplier Id" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/SupplierId}" 
+                    type="Text"
+                    change=".validateField"
+                /> 
+                <Label text="Quantity Unit" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/QuantityUnit}" 
+                    type="Text"
+                    change=".validateField"
+                />   
+                <Label text="UoM" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/Uom}" 
+                    type="Text"
+                    change=".validateField"
+                />   
+                <Label text="Weight" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/Weight}" 
+                    type="Text"
+                    change=".validateField"
+                /> 
+                <Label text="Discontinued" required="true"/>
+                <Input 
+                    value="{form>/currentProduct/Discontinued}" 
+                    type="Text"
+                    change=".validateField"
+                />   
+            </f:SimpleForm>
+            <f:SimpleForm id="priceUpdateForm" editable="true" layout="ResponsiveGridLayout">
+                <Label text="Product Id" required="true"/>
+                <Input 
+                    value="{form>/currentPrice/ProductId}" 
+                    type="Text"
+                    change=".validateField"
+                />
+                <Label text="Value" required="true"/>
+                <Input 
+                    value="{form>/currentPrice/Value}" 
+                    type="Text"
+                    change=".validateField"
+                />
+                <Label text="Currency" required="true"/>
+                <Input 
+                    value="{form>/currentPrice/Currency}" 
+                    type="Text"
+                    change=".validateField"
+                />
+                <Label text="Valid From" required="true"/>
+                <Input 
+                    value="{form>/currentPrice/ValidFrom}" 
+                    type="Text"
+                    change=".validateField"
+                />       
+                <Label text="Valid To" required="true"/>
+                <Input 
+                    value="{form>/currentPrice/ValidTo}" 
+                    type="Text"
+                    change=".validateField"
+                />        
+            </f:SimpleForm>
+        </content>
+        
+        <footer>
+            <Toolbar class="padded-footer">
+                <Button text="Product and Price List" press=".onProductAndPriceListButton"/>
+                <Button text="Request List" press=".onRequestListButton"/>
+                <ToolbarSpacer/>
+                <Button text="Clear" press=".onCancel" class="sapUiSmallMarginEnd"/>
+                <Button type="Emphasized" text="Update" press=".onSubmit"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

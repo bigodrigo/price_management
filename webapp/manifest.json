@@ -104,6 +104,11 @@
           "name": "RouteProductAndPriceList",
           "pattern": "ProductAndPriceList",
           "target": ["TargetProductAndPriceList"]
+        },
+        {
+          "name": "RouteUpdateProductAndPrice",
+          "pattern": "ProductAndPrice/update/{ProductAndPriceId}",
+          "target": ["TargetUpdateProductAndPrice"]
         }
       ],
       "targets": {
@@ -125,6 +130,11 @@
           "transition": "slide",
           "viewId": "ProductAndPriceList",
           "viewName": "ProductAndPriceList"
+        },
+        "TargetUpdateProductAndPrice": {
+          "viewId": "UpdateProductAndPrice",
+          "viewName": "UpdateProductAndPrice",
+          "viewLevel": 2
         }
       }
     },

@@ -118,7 +118,7 @@ sap.ui.define([
             var sId = oContext.getProperty("Id");
         
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteEditProductAndPrice", {
+            oRouter.navTo("RouteUpdateProductAndPrice", {
                 ProductAndPriceId: sId
             });
         },        
