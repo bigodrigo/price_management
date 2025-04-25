@@ -99,6 +99,11 @@
           "name": "RouteCreateProductAndPrice",
           "pattern": "CreateProductAndPrice",
           "target": ["TargetCreateProductAndPrice"]
+        },
+        {
+          "name": "RouteProductAndPriceList",
+          "pattern": "ProductAndPriceList",
+          "target": ["TargetProductAndPriceList"]
         }
       ],
       "targets": {
@@ -114,6 +119,12 @@
           "transition": "slide",
           "viewId": "CreateProductAndPrice",
           "viewName": "CreateProductAndPrice"
+        },
+        "TargetProductAndPriceList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "ProductAndPriceList",
+          "viewName": "ProductAndPriceList"
         }
       }
     },

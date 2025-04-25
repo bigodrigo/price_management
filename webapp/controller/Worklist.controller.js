@@ -138,8 +138,7 @@ sap.ui.define([
 
         onProductAndPriceListButton: function () {
             const oRouter = this.getOwnerComponent().getRouter();
-            // oRouter.navTo("RouteProductAndPriceList");
-            oRouter.navTo("RouteCreateProductAndPrice");
+            oRouter.navTo("RouteProductAndPriceList");
         },
 
         onRequestListButton: function () {

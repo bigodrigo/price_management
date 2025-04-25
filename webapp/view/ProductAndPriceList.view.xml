@@ -1,0 +1,118 @@
+<mvc:View 
+    controllerName="pricemanagement.controller.ProductAndPriceList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    height="100%"
+>
+
+<!-- DynamicPage - Header ? -->
+	<Page
+        id="productAndPriceListPage"
+        showFooter="true"
+        title="Product and Price List"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
+		<content>
+			<Table
+				id="productAndPriceListTable"
+                width="auto"
+                items="{ 
+                    path: '/ProductSet',
+                    sorter: {
+                        path: 'Id',
+                        descending: false
+                    },
+                    parameters: {
+                        expand: 'toPrice,toRequest'
+                    }
+                }"
+                updateFinished=".onUpdateFinished"
+            >
+				<columns>
+					<Column width="5rem">
+                        <Text text="ID"/>
+					</Column>
+
+                    <Column width="5rem" hAlign="Center">
+                        <Text text="External Code"/>
+					</Column>
+
+					<Column width="5rem" hAlign="Center">
+						<Text text="Product"/>
+					</Column>
+
+                    <Column width="5rem" hAlign="Center">
+						<Text text="Weight"/>
+					</Column>
+
+                    <Column width="5rem" hAlign="Center">
+						<Text text="UoM"/>
+					</Column>
+                    
+                    <!-- <Column width="5rem" hAlign="Center">
+						<Text text="Value"/>
+					</Column>
+
+                    <Column width="5rem" hAlign="Center">
+						<Text text="Currency"/>
+					</Column> -->
+
+                    <Column width="3rem" hAlign="Center">
+                        <Text text="Delete" />
+                    </Column>
+				</columns>
+                <items>
+                    <ColumnListItem type="Active" press=".onMaterialPress">
+                        <cells>
+                            <ObjectIdentifier title="{Id}" />
+
+                            <Text  text="{ExternalCode}" />
+
+                            <Text  text="{Name}" />
+
+                            <Text  text="{Weight}" />
+
+                            <Text  text="{Uom}" />
+
+                            <!-- <Text  text="{toPrice/Value}" /> -->
+
+                            <!-- <VBox>
+                                <items>
+                                    <Text text="{parts: ['toPrice'], formatter: '.formatPrices'}" />
+                                </items>
+                            </VBox> -->
+
+                            <!-- <Text text="{path: 'toPrice', formatter: '.formatPrices'}" /> -->
+
+                            <!-- <Text  text="{toPrice/Currency}" /> -->
+
+                            <!-- <ObjectIdentifier  
+                                title="{PriceSet}"
+                                text="{toPrice/Currency}"    
+                            /> -->
+
+                            <Button 
+                                icon="sap-icon://delete"
+                                type="Transparent"
+                                press=".onDeleteProductAndPrice"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+			</Table>
+		</content>
+
+        <footer>
+            <Toolbar class="padded-footer">
+                <Button text="Product and Price List" press=".onProductAndPriceListButton"/>
+                <Button text="Request List" press=".onRequestListButton"/>
+                <ToolbarSpacer/>
+                <Button text="Add New" press=".onAddProductAndPrice" type="Emphasized"/>
+            </Toolbar>
+        </footer>
+	</Page>
+</mvc:View>
