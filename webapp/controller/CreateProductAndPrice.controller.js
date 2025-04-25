@@ -149,7 +149,7 @@ sap.ui.define([
                 // oFormModel.setProperty("/newProduct/CategoryId", oProductData.CategoryId ? `Categoria ${oProductData.CategoryId}` : "");
                 // oFormModel.setProperty("/newProduct/SupplierID", oProductData.SupplierID ? `Fornecedor ${oProductData.SupplierID}` : "");
                 oFormModel.setProperty("/newProduct/CategoryId", oProductData.CategoryId || "");
-                oFormModel.setProperty("/newProduct/SupplierID", oProductData.SupplierID || "");
+                oFormModel.setProperty("/newProduct/SupplierId", oProductData.SupplierId || "");
                 oFormModel.setProperty("/newProduct/Weight", oProductData.Weight || "");
                 oFormModel.setProperty("/newProduct/Discontinued", oProductData.Discontinued || "");
         

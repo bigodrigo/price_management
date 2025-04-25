@@ -44,7 +44,7 @@
                     type="Text"
                     change=".validateField"
                 />  
-                <Label text="SupplierId" required="true"/>
+                <Label text="Supplier Id" required="true"/>
                 <Input 
                     id="productSupplierIdInput" 
                     value="{form>/newProduct/SupplierId}" 
