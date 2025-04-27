@@ -35,7 +35,7 @@ sap.ui.define([
 
             oModel.read("/ProductSet", {
                 success: function(oData) {
-                    console.log("Produtos carregados:", oData);  // Verifique se os produtos estão corretos.
+                    console.log("Loaded products:", oData);
                     oProductsModel.setData({ products: oData.results });
                     oView.setModel(oProductsModel, "products");
                 },
@@ -51,7 +51,7 @@ sap.ui.define([
         onProductSelected: async function(oEvent) {
             const oView = this.getView();
             const sProductId = oEvent.getSource().getSelectedKey();
-            console.log('Produto selecionado:', sProductId);  // Adicionando log para verificar a seleção.
+            console.log('Selected Product:', sProductId);
             const oFormModel = oView.getModel("form");
         
             if (!sProductId) {
@@ -154,49 +154,6 @@ sap.ui.define([
         onRequestListButton: function () {
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("RouteWorklist");
-        },
-
-        updatePrice: function() {
-            console.log("API fetch...");
-            const oTable = this.byId("table");
-            const aItems = oTable.getItems();
-            const oModel = this.getView().getModel();
-        
-            if (aItems.length > 0) {
-                const processItems = async () => {
-                    for (const oItem of aItems) {
-                        let sPath;
-                        try {
-                            const oContext = oItem.getBindingContext();
-                            sPath = oContext.getPath();
-                            const oMaterial = oModel.getProperty(`${sPath}/toMaterial`);
-                            
-                            if (!oMaterial || !oMaterial.CodigoExterno) {
-                                console.warn(`Material ID not found for item at path: ${sPath}`);
-                                continue;
-                            }
-        
-                            console.log(`Fetching price for material: ${oMaterial.CodigoExterno}`);
-                            
-                            const oResponse = await this.ajaxRequest(oMaterial.CodigoExterno);
-                            const fPrice = oResponse[0].d.UnitPrice;
-                            
-                            oModel.setProperty(`${sPath}/PrecoNovo`, fPrice);
-                            console.log(`Price updated for material ${oMaterial.CodigoExterno}: ${fPrice}`);
-                            
-                        } catch (oError) {
-                            console.error(`Error processing item: ${oError.message}`);
-                            if (sPath) {
-                                oModel.setProperty(`${sPath}/PrecoNovo`, "N/A");
-                            }
-                        }
-                    }
-                };
-                
-                processItems().catch(oError => {
-                    console.error(`Error in buscaPreco: ${oError.message}`);
-                });
-            }
         },
 
         ajaxRequest: function(sExternalCode) {

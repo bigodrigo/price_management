@@ -25,7 +25,6 @@ sap.ui.define([
                     : oI18n.getText("worklistTableTitle");
 
                 this.getView().getModel().setProperty("/worklistTableTitle", sTitle);
-                // No need to call fetchNewPrices anymore as prices are already handled
             } catch (oError) {
                 console.error("Error in onUpdateFinished:", oError);
             }

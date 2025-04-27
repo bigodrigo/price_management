@@ -16,11 +16,9 @@ sap.ui.define([
 
         onDeleteProductAndPrice: function (oEvent) {
             var oButton = oEvent.getSource();
-            var oItem = oButton.getParent(); // ColumnListItem
+            var oItem = oButton.getParent();
             var oContext = oItem.getBindingContext();
             var sProductAndPriceId = oContext.getProperty("Id");
-            // var oProductData = oContext.getObject();
-            // var sProductAndPriceId = oProductData.Id;
             
             var that = this;
         
@@ -42,18 +40,15 @@ sap.ui.define([
             const that = this;
         
             oView.setBusy(true);
-        
-            // Deleta todos os preços relacionados ao produto via product_id
             const sDeletePricesPath = "/PriceSet('" + sProductAndPriceId + "')";
         
             oModel.remove(sDeletePricesPath, {
                 success: function () {
-                    // Após deletar os preços com sucesso, deletamos o produto
                     that._deleteProduct(sProductAndPriceId);
                 },
                 error: function (oError) {
                     oView.setBusy(false);
-                    MessageBox.error("Erro ao excluir os preços relacionados.");
+                    MessageBox.error("Error removing prices.", oError);
                 }
             });
         },        
@@ -66,7 +61,7 @@ sap.ui.define([
                 success: function () {
                     oView.setBusy(false);
                     MessageToast.show("Product and its Prices deleted successfully!");
-                    oModel.refresh(true); // Atualiza os dados na tela
+                    oModel.refresh(true);
                 },
                 error: function () {
                     oView.setBusy(false);
@@ -105,7 +100,6 @@ sap.ui.define([
         onAddProductAndPrice: function() {
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("RouteCreateProductAndPrice");
-            // oRouter.navTo("RouteCreateRequest");
         },
 
         onProductAndPricePress: function(oEvent) {

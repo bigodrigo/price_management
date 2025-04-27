@@ -31,7 +31,6 @@ sap.ui.define([
 
             oModel.read(sPath, {
                 success: function (oProductData) {
-                    console.log("✅ Product loaded:", oProductData);
                     oView.getModel("form").setProperty("/currentProduct", oProductData);
 
                     const priceFilter = [
@@ -41,7 +40,6 @@ sap.ui.define([
                     oModel.read("/PriceSet", {
                         filters: priceFilter,
                         success: function (oPriceResult) {
-                            console.log("✅ Prices found:", oPriceResult);
                             if (oPriceResult.results && oPriceResult.results.length > 0) {
                                 const latestPrice = oPriceResult.results[0];
                                 oView.getModel("form").setProperty("/currentPrice", latestPrice);
@@ -144,12 +142,11 @@ sap.ui.define([
             const oModel = this.getView().getModel();
             const sPath = `/PriceSet(ProductId='${oData.ProductId}',ValidFrom=datetime'${oData.ValidFrom}')`;
 
-            
             // Primeiro, buscar o CSRF Token
             oModel.setHeaders({
                 "X-CSRF-Token": "Fetch"
             });
-            
+
             return new Promise((resolve, reject) => {
                 oModel.update(sPath, oData, {
                     success: function() {
