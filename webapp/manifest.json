@@ -109,6 +109,11 @@
           "name": "RouteUpdateProductAndPrice",
           "pattern": "ProductAndPrice/update/{ProductAndPriceId}",
           "target": ["TargetUpdateProductAndPrice"]
+        },
+        {
+          "name": "RouteCreateRequest",
+          "pattern": "CreateRequest",
+          "target": ["TargetCreateRequest"]
         }
       ],
       "targets": {
@@ -135,6 +140,12 @@
           "viewId": "UpdateProductAndPrice",
           "viewName": "UpdateProductAndPrice",
           "viewLevel": 2
+        },
+        "TargetCreateRequest": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "CreateRequest",
+          "viewName": "CreateRequest"
         }
       }
     },

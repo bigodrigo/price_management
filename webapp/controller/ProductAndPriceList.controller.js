@@ -109,7 +109,8 @@ sap.ui.define([
 
         onAddProductAndPrice: function() {
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteCreateProductAndPrice");
+            // oRouter.navTo("RouteCreateProductAndPrice");
+            oRouter.navTo("RouteCreateRequest");
         },
 
         onProductAndPricePress: function(oEvent) {

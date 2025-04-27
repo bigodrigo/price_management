@@ -1,0 +1,97 @@
+<mvc:View
+    controllerName="pricemanagement.controller.CreateRequest"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    height="100%">
+
+    <Page
+        id="CreateRequestPage"
+        title="New Request"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+    >
+        <content>
+            <f:SimpleForm id="requestCreationForm" editable="true" layout="ResponsiveGridLayout">
+                
+                <Label text="Product" required="true"/>
+                <Select
+                    id="requestProductSelect"
+                    items="{products>/products}"
+                    change=".onProductSelected"
+                >
+                    <core:Item
+                        key="{products>Id}"
+                        text="{products>Name}" />
+                </Select>
+
+                <Label text="Request Date" required="true"/>
+                <DatePicker  
+                    id="requestDateInputPicker"
+                    enabled="false"
+                    value="{ 
+                        path: 'form>/newRequest/RequestDate', 
+                        type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            pattern: 'dd.MM.yyyy'
+                        }
+                    }"
+                />
+
+                <Label text="Request Time" required="true"/>
+                <TimePicker 
+                    id="requestTimeInputPicker" 
+                    enabled="false"
+                    value="{ 
+                        path: 'form>/newRequest/RequestTime', 
+                        type: 'sap.ui.model.type.Time'
+                    }"
+                    displayFormat="HH:mm:ss"
+                />
+
+                <Label text="New Price" required="true"/>
+                <Input 
+                    id="requestNewPriceInput"
+                    value="{form>/newRequest/NewPrice}"
+                    type="Number"
+                />
+
+                <Label text="Currency" required="true"/>
+                <Input 
+                    id="requestCurrencyInput"
+                    value="{form>/newRequest/Currency}"
+                    type="Text"
+                />
+
+                <Label text="Status" required="true"/>
+                <Input 
+                    id="requestStatusInput"
+                    value="{form>/newRequest/Status}"
+                    type="Text"
+                    editable="false"
+                />
+
+                <Label text="Approver User"/>
+                <Input 
+                    id="requestApproverUserInput"
+                    value="{form>/newRequest/ApproverUser}"
+                    type="Text"
+                />
+                
+            </f:SimpleForm>
+        </content>
+        
+        <footer>
+            <Toolbar class="padded-footer">
+                <Button text="Product and Price List" press=".onProductAndPriceListButton"/>
+                <Button text="Request List" press=".onRequestListButton"/>
+                <ToolbarSpacer/>
+                <Button text="Clear" press=".onCancel" class="sapUiSmallMarginEnd"/>
+                <Button type="Emphasized" text="Add" press=".onSubmit"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
