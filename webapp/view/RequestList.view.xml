@@ -1,5 +1,5 @@
 <mvc:View 
-    controllerName="pricemanagement.controller.ProductAndPriceList"
+    controllerName="pricemanagement.controller.RequestList"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
@@ -9,19 +9,19 @@
 
 <!-- DynamicPage - Header ? -->
 	<Page
-        id="productAndPriceListPage"
+        id="requestListPage"
         showFooter="true"
-        title="Product and Price List"
+        title="Request List"
         titleAlignment="Center"
         showNavButton="true"
         navButtonPress=".onNavBack"
     >
 		<content>
 			<Table
-				id="productAndPriceListTable"
+				id="requestListTable"
                 width="auto"
                 items="{ 
-                    path: '/ProductSet',
+                    path: '/RequestSet',
                     sorter: {
                         path: 'Id',
                         descending: false
@@ -38,27 +38,31 @@
 					</Column>
 
                     <Column width="5rem" hAlign="Center">
-                        <Text text="External Code"/>
+                        <Text text="Product Id"/>
 					</Column>
 
 					<Column width="5rem" hAlign="Center">
-						<Text text="Product"/>
+						<Text text="Request Date"/>
 					</Column>
 
                     <Column width="5rem" hAlign="Center">
-						<Text text="Weight"/>
+						<Text text="Request Time"/>
 					</Column>
 
                     <Column width="5rem" hAlign="Center">
-						<Text text="UoM"/>
-					</Column>
-                    
-                    <Column width="5rem" hAlign="Center">
-						<Text text="Value"/>
+						<Text text="New Price"/>
 					</Column>
 
                     <Column width="5rem" hAlign="Center">
 						<Text text="Currency"/>
+					</Column>
+                             
+                    <Column width="5rem" hAlign="Center">
+						<Text text="Status"/>
+					</Column>
+
+                    <Column width="5rem" hAlign="Center">
+						<Text text="Approver User"/>
 					</Column>
 
                     <Column width="3rem" hAlign="Center">
@@ -66,39 +70,28 @@
                     </Column>
 				</columns>
                 <items>
-                    <ColumnListItem type="Active" press=".onProductAndPricePress">
+                    <ColumnListItem type="Active" press=".onRequestPress">
                         <cells>
                             <ObjectIdentifier title="{Id}" />
 
-                            <Text  text="{ExternalCode}" />
+                            <Text text="{ProductId}" />
 
-                            <Text  text="{Name}" />
+                            <Text text="{RequestDate}" />
 
-                            <Text  text="{Weight}" />
+                            <Text text="{RequestTime}" />
 
-                            <Text  text="{Uom}" />
+                            <Text text="{NewPrice}" />
 
-                            <Text  text="{toPrice/Value}" />
+                            <Text text="{Currency}" />
 
-                            <!-- <VBox>
-                                <items>
-                                    <Text text="{parts: ['toPrice'], formatter: '.formatPrices'}" />
-                                </items>
-                            </VBox> -->
+                            <Text text="{Status}" />
 
-                            <!-- <Text text="{path: 'toPrice', formatter: '.formatPrices'}" /> -->
-
-                            <Text  text="{toPrice/Currency}" />
-
-                            <!-- <ObjectIdentifier  
-                                title="{PriceSet}"
-                                text="{toPrice/Currency}"    
-                            /> -->
+                            <Text text="{ApproverUser}" />
 
                             <Button 
                                 icon="sap-icon://delete"
                                 type="Transparent"
-                                press=".onDeleteProductAndPrice"
+                                press=".onDeleteRequest"
                             />
                         </cells>
                     </ColumnListItem>
@@ -111,7 +104,7 @@
                 <Button text="Product and Price List" press=".onProductAndPriceListButton"/>
                 <Button text="Request List" press=".onRequestListButton"/>
                 <ToolbarSpacer/>
-                <Button text="Add New" press=".onAddProductAndPrice" type="Emphasized"/>
+                <Button text="Add New Request" press=".onAddRequest" type="Emphasized"/>
             </Toolbar>
         </footer>
 	</Page>

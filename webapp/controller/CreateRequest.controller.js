@@ -126,7 +126,7 @@ sap.ui.define([
 
         onNavBack: function() {
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteRequestList");
+            oRouter.navTo("RouteWorklist");
         },
 
         onCancel: function() {
@@ -152,8 +152,8 @@ sap.ui.define([
         },
 
         onRequestListButton: function () {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteRequestList");
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteWorklist");
         },
 
         updatePrice: function() {

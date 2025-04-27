@@ -15,6 +15,11 @@
         title="{i18n>worklistTitle}"
         titleAlignment="Center"
     >
+        <headerContent>
+            <Toolbar>
+                <Button text="Add New Request" press=".onAddRequest" type="Emphasized"/>
+            </Toolbar>
+        </headerContent>
         <content>
             <Table
                 id="table"
@@ -23,7 +28,7 @@
                 items="{ 
                     path: '/RequestSet',
                     sorter: {
-                        path: 'Product',
+                        path: 'ProductId',
                         descending: false
                     },
                     parameters: {

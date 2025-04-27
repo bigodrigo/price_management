@@ -2,79 +2,60 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/m/MessageBox"
-], function (Controller,MessageToast,MessageBox) {
+], function (Controller, MessageToast, MessageBox) {
     "use strict";
 
-    return Controller.extend("pricemanagement.controller.ProductAndPriceList", {
+    return Controller.extend("pricemanagement.controller.RequestList", {
         getResourceBundle: function() {
             return this.getOwnerComponent().getModel("i18n").getResourceBundle();
         },
 
         onInit: function () {
-           
+
         },
 
-        onDeleteProductAndPrice: function (oEvent) {
+        onDeleteRequest: function (oEvent) {
             var oButton = oEvent.getSource();
             var oItem = oButton.getParent(); // ColumnListItem
             var oContext = oItem.getBindingContext();
-            var sProductAndPriceId = oContext.getProperty("Id");
-            // var oProductData = oContext.getObject();
-            // var sProductAndPriceId = oProductData.Id;
-            
+            var sRequestId = oContext.getProperty("Id");
+
             var that = this;
         
-            MessageBox.confirm("Are you sure you want to delete the Product and Price?", {
+            MessageBox.confirm("Are you sure you want to delete the Request?", {
                 title: "Confirm Deletion",
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                 emphasizedAction: MessageBox.Action.NO,
                 onClose: function (sAction) {
                     if (sAction === MessageBox.Action.YES) {
-                        that._deleteProductAndPrice(sProductAndPriceId);
+                        that._deleteRequest(sRequestId);
                     }
                 }
             });
         },
 
-        _deleteProductAndPrice: function (sProductAndPriceId) {
+        _deleteRequest: function (sRequestId) {
             const oModel = this.getView().getModel();
             const oView = this.getView();
             const that = this;
         
             oView.setBusy(true);
         
-            // Deleta todos os preços relacionados ao produto via product_id
-            const sDeletePricesPath = "/PriceSet('" + sProductAndPriceId + "')";
+            const sDeleteRequestPath = "/RequestSet('" + sRequestId + "')";
         
-            oModel.remove(sDeletePricesPath, {
-                success: function () {
-                    // Após deletar os preços com sucesso, deletamos o produto
-                    that._deleteProduct(sProductAndPriceId);
-                },
-                error: function (oError) {
-                    oView.setBusy(false);
-                    MessageBox.error("Erro ao excluir os preços relacionados.");
-                }
-            });
-        },        
-        
-        _deleteProduct: function (sId) {
-            const oModel = this.getView().getModel();
-            const oView = this.getView();
-        
-            oModel.remove("/ProductSet('" + sId + "')", {
+            oModel.remove(sDeleteRequestPath, {
                 success: function () {
                     oView.setBusy(false);
-                    MessageToast.show("Product and its Prices deleted successfully!");
-                    oModel.refresh(true); // Atualiza os dados na tela
+                    MessageToast.show("Request deleted successfully!");
+                    oModel.refresh(true); // Refreshes the data on the screen
                 },
                 error: function () {
                     oView.setBusy(false);
-                    MessageBox.error("Error deleting Product.");
+                    MessageBox.error("Error deleting the Request.");
                 }
             });
-        },   
-        
+        },
+
         formatPrices: function(aPrices) {
             console.log("Received prices:", aPrices);
         
@@ -85,7 +66,7 @@ sap.ui.define([
             return aPrices.results.map(function(p) {
                 return p.Value + " " + p.Currency;
             }).join(", ");
-        },        
+        },
 
         onNavBack: function () {
             var oRouter = this.getOwnerComponent().getRouter();
@@ -102,21 +83,20 @@ sap.ui.define([
             oRouter.navTo("RouteWorklist");
         },
 
-        onAddProductAndPrice: function() {
+        onAddRequest: function() {
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteCreateProductAndPrice");
-            // oRouter.navTo("RouteCreateRequest");
+            oRouter.navTo("RouteCreateRequest");
         },
 
-        onProductAndPricePress: function(oEvent) {
+        onRequestPress: function(oEvent) {
             var oItem = oEvent.getSource();
             var oContext = oItem.getBindingContext();
             var sId = oContext.getProperty("Id");
         
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteUpdateProductAndPrice", {
-                ProductAndPriceId: sId
+            oRouter.navTo("RouteUpdateRequest", {
+                RequestId: sId
             });
-        },        
+        },
     });
 });

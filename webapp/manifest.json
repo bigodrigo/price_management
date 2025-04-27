@@ -114,6 +114,11 @@
           "name": "RouteCreateRequest",
           "pattern": "CreateRequest",
           "target": ["TargetCreateRequest"]
+        },
+        {
+          "name": "RouteRequestList",
+          "pattern": "RequestList",
+          "target": ["TargetRequestList"]
         }
       ],
       "targets": {
@@ -146,6 +151,12 @@
           "transition": "slide",
           "viewId": "CreateRequest",
           "viewName": "CreateRequest"
+        },
+        "TargetRequestList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "RequestList",
+          "viewName": "RequestList"
         }
       }
     },

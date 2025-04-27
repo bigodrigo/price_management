@@ -170,8 +170,8 @@ sap.ui.define([
         },
 
         onRequestListButton: function () {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteRequestList");
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteWorklist");
         }
     });
 });

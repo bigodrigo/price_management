@@ -25,79 +25,10 @@ sap.ui.define([
                     : oI18n.getText("worklistTableTitle");
 
                 this.getView().getModel().setProperty("/worklistTableTitle", sTitle);
-                // this.fetchNewPrices();
+                // No need to call fetchNewPrices anymore as prices are already handled
             } catch (oError) {
                 console.error("Error in onUpdateFinished:", oError);
             }
-        },
-
-        fetchNewPrices: function () {
-            console.log("Starting price fetch...");
-            const oTable = this.byId("table");
-            const aItems = oTable.getItems();
-            const oModel = this.getView().getModel();
-
-            if (aItems.length > 0) {
-                const processItems = async () => {
-                    for (const oItem of aItems) {
-                        let sPath;
-                        try {
-                            const oContext = oItem.getBindingContext();
-                            sPath = oContext.getPath();
-                            const oProduct = oModel.getProperty(`${sPath}/toProduct`);
-
-                            if (!oProduct || !oProduct.ExternalCode) {
-                                console.warn(`Product ID not found for item at path: ${sPath}`);
-                                continue;
-                            }
-
-                            console.log(`Fetching price for product: ${oProduct.ExternalCode}`);
-
-                            const oResponse = await this.ajaxRequest(oProduct.ExternalCode);
-                            const fPrice = oResponse[0].d.UnitPrice;
-
-                            oModel.setProperty(`${sPath}/NewPrice`, fPrice);
-                            console.log(`Price updated for product ${oProduct.ExternalCode}: ${fPrice}`);
-
-                        } catch (oError) {
-                            console.error(`Error processing item: ${oError.message}`);
-                            if (sPath) {
-                                oModel.setProperty(`${sPath}/NewPrice`, "N/A");
-                            }
-                        }
-                    }
-                };
-
-                processItems().catch(oError => {
-                    console.error(`Error in fetchNewPrices: ${oError.message}`);
-                });
-            }
-        },
-
-        ajaxRequest: function (sProductId) {
-            return new Promise((resolve, reject) => {
-                const sUrl = `https://cors-anywhere.herokuapp.com/https://services.odata.org/V2/Northwind/Northwind.svc/Products(${sProductId})`;
-
-                $.ajax({
-                    url: sUrl,
-                    method: 'GET',
-                    dataType: 'json',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    success: (oData, sTextStatus, oJqXHR) => {
-                        if (!oData || !oData.d) {
-                            reject(new Error("Invalid response format"));
-                            return;
-                        }
-                        resolve([oData, sTextStatus, oJqXHR]);
-                    },
-                    error: (oJqXHR, sTextStatus, sErrorThrown) => {
-                        reject(new Error(`AJAX error: ${sTextStatus} - ${sErrorThrown}`));
-                    }
-                });
-            });
         },
 
         onReject: function () {
@@ -142,8 +73,13 @@ sap.ui.define([
         },
 
         onRequestListButton: function () {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("RouteRequestList");
-        }
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteWorklist");
+        },
+
+        onAddRequest: function() {
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteCreateRequest");
+        },
     });
 });
