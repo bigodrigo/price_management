@@ -109,8 +109,8 @@
                     <End EntitySet="PriceSet" Role="ToRole_RequestToPrice"/>
                 </AssociationSet>
             </EntityContainer>
-            <atom:link rel="self" href="https://vm57.4hub.cloud:44357/sap/opu/odata/sap/ZPRICE_MGMT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
-            <atom:link rel="latest-version" href="https://vm57.4hub.cloud:44357/sap/opu/odata/sap/ZPRICE_MGMT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="self" href="https://{{YOUR_BACKEND_URL}}/sap/opu/odata/sap/ZPRICE_MGMT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://{{YOUR_BACKEND_URL}}/sap/opu/odata/sap/ZPRICE_MGMT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
