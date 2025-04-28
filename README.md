@@ -64,7 +64,7 @@
 
 ### Links
 
-- Solution URL: [GitHub Repo](https://github.com/yourgithub/price-management-project)
+- Solution URL: [GitHub Repo](https://github.com/bigodrigo/price_management/)
 - Live Site URL: (Deployment not available yet)
 
 ## My process
